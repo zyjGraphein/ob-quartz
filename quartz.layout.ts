@@ -8,8 +8,8 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [],
   footer: Component.Footer({
     links: {
-      GitHub: "https://github.com/jackyzha0/quartz",
-      "Discord Community": "https://discord.gg/cRFFHYye7t",
+      GitHub: "https://github.com/zyjGraphein",
+      "Personal Website": "https://discord.gg/cRFFHYye7t",
     },
   }),
 }
@@ -38,7 +38,22 @@ export const defaultContentPageLayout: PageLayout = {
         { Component: Component.ReaderMode() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({
+      title: "Blog Directory", 
+      folderDefaultState: "collapsed", 
+      mapFn: (node) => {
+        if (node.isFolder) {
+          node.displayName = "📁 " + node.displayName
+        } else {
+          node.displayName = "📄 " + node.displayName
+        }
+      },
+    }),
+    Component.RecentNotes({
+      title: "RecentNotes",
+      limit: 3,
+      showTags: true,
+    }),
   ],
   right: [
     Component.Graph(),
